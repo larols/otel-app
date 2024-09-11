@@ -3,7 +3,7 @@ from opentelemetry import metrics
 from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter
 from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
-from opentelemetry.sdk.metrics import Counter, Observation
+from opentelemetry.sdk.metrics import Counter
 
 # Initialize the OTLP exporter
 exporter = OTLPMetricExporter(endpoint="http://otel-collector:4317", insecure=True)
@@ -23,7 +23,7 @@ requests_counter = meter.create_counter(
 # Generate some test metrics
 def main():
     for i in range(100):
-        requests_counter.add(1)
+        requests_counter.add(1)  # Increment the counter
         print(f"Sent metric {i+1}")
         time.sleep(1)
 
