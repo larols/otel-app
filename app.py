@@ -2,11 +2,11 @@ import time
 from opentelemetry import trace
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPTraceExporter
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter  # Updated import path
 from opentelemetry.sdk.trace import Span
 
 # Initialize the OTLP trace exporter
-trace_exporter = OTLPTraceExporter(endpoint="http://otel-collector.default.svc.cluster.local:4317", insecure=True)
+trace_exporter = OTLPSpanExporter(endpoint="http://otel-collector.default.svc.cluster.local:4317", insecure=True)
 
 # Set up the TracerProvider and span processor
 trace_provider = TracerProvider()
