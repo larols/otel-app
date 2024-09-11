@@ -16,7 +16,7 @@ meter = metrics.get_meter(__name__)
 
 # Create a counter for test metrics
 requests_counter = meter.create_counter(
-    name="requests",
+    name="otel.requests",  # Updated metric name to include 'otel'
     description="A simple counter for test requests",
 )
 
