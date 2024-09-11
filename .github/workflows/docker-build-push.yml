@@ -1,0 +1,27 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+
+      # Step 3: Build the Docker image
+      - name: Build Docker image
+        run: docker build -t laols/otel-app:latest .
+
+      # Step 4: Push the Docker image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: docker push laols/otel-app:latest
